@@ -1,3 +1,5 @@
-export default function StorePage() {
-  return <h1>스토어</h1>;
+import { StorePage } from "@/features/store/components/store-page";
+
+export default function Page() {
+  return <StorePage />;
 }
