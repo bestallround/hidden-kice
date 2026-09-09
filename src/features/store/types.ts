@@ -7,4 +7,5 @@ export type Product = {
   price: number;
   originalPrice?: number;
   discountRate?: number;
+  imageUrl?: string;
 };

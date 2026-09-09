@@ -10,8 +10,16 @@ export function ProductCard({ product }: { product: Product }) {
 
   return (
     <article>
-      <div className="flex aspect-[4/5] items-center justify-center border border-dashed border-zinc-300 bg-white text-sm text-zinc-400">
-        {product.category} 이미지
+      <div className="flex aspect-[4/5] items-center justify-center overflow-hidden border border-dashed border-zinc-300 bg-white text-sm text-zinc-400">
+        {product.imageUrl ? (
+          <img
+            src={product.imageUrl}
+            alt={product.title}
+            className="h-full w-full object-contain"
+          />
+        ) : (
+          `${product.category} 이미지`
+        )}
       </div>
       <p className="mt-3 text-sm text-zinc-500">{product.category}</p>
       <h2 className="mt-1 font-semibold">{product.title}</h2>
