@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const NAV_ITEMS = [
   { href: "/store", label: "스토어" },
@@ -8,6 +11,8 @@ const NAV_ITEMS = [
 ] as const;
 
 export function Header() {
+  const pathname = usePathname();
+
   return (
     <header className="sticky top-0 z-10 border-b border-zinc-100 bg-white">
       <div className="mx-auto grid h-[72px] max-w-[1200px] grid-cols-[1fr_auto_1fr] items-center px-6">
@@ -15,12 +20,20 @@ export function Header() {
           <img src="/icons/LOGO.svg" alt="HIDDEN KICE" width={143} height={18} />
         </Link>
 
-        <nav className="flex items-center gap-9 text-[15px] font-medium text-zinc-800">
-          {NAV_ITEMS.map((item) => (
-            <Link key={item.label} href={item.href} className="hover:text-[#5b4dff]">
-              {item.label}
-            </Link>
-          ))}
+        <nav className="flex items-center gap-9 font-['Pretendard'] text-[18px] leading-[1.6] font-semibold">
+          {NAV_ITEMS.map((item) => {
+            const isActive = item.href !== "#" && pathname.startsWith(item.href);
+
+            return (
+              <Link
+                key={item.label}
+                href={item.href}
+                className={isActive ? "text-[#7F77DD]" : "text-[#979CA5]"}
+              >
+                {item.label}
+              </Link>
+            );
+          })}
         </nav>
 
         <div className="flex items-center justify-self-end gap-5">
