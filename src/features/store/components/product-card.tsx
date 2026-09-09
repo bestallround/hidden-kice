@@ -1,13 +1,4 @@
-export type ProductCategory = "패스" | "단품";
-
-export type Product = {
-  id: string;
-  category: ProductCategory;
-  title: string;
-  price: number;
-  originalPrice?: number;
-  discountRate?: number;
-};
+import type { Product } from "../types";
 
 function formatPrice(value: number) {
   return `${value.toLocaleString("ko-KR")}원`;

@@ -1,108 +1,23 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { ProductCard, type Product } from "./product-card";
+import { useProducts } from "../hooks/use-products";
+import { ProductCard } from "./product-card";
 import {
   isProductCategory,
   ProductToolbar,
   type ToolbarCategory,
 } from "./product-toolbar";
 
-const DUMMY_PRODUCTS: Product[] = [
-  {
-    id: "1",
-    category: "단품",
-    title: "2026 Hidden Kice 시즌7",
-    price: 40000,
-  },
-  {
-    id: "2",
-    category: "패스",
-    title: "2026 Hidden Kice 시즌7",
-    price: 64800,
-    originalPrice: 78000,
-    discountRate: 5,
-  },
-  {
-    id: "3",
-    category: "단품",
-    title: "2026 Hidden Kice 시즌7",
-    price: 40000,
-  },
-  {
-    id: "4",
-    category: "패스",
-    title: "2026 Hidden Kice 시즌7",
-    price: 64800,
-    originalPrice: 78000,
-    discountRate: 5,
-  },
-  {
-    id: "5",
-    category: "단품",
-    title: "2026 Hidden Kice 시즌6",
-    price: 40000,
-  },
-  {
-    id: "6",
-    category: "패스",
-    title: "2026 Hidden Kice 시즌7",
-    price: 64800,
-    originalPrice: 78000,
-    discountRate: 5,
-  },
-  {
-    id: "7",
-    category: "단품",
-    title: "2026 Hidden Kice 시즌7",
-    price: 40000,
-  },
-  {
-    id: "8",
-    category: "패스",
-    title: "2026 Hidden Kice 시즌6",
-    price: 64800,
-    originalPrice: 78000,
-    discountRate: 5,
-  },
-  {
-    id: "9",
-    category: "단품",
-    title: "2026 Hidden Kice 시즌7",
-    price: 40000,
-  },
-  {
-    id: "10",
-    category: "패스",
-    title: "2026 Hidden Kice 시즌7",
-    price: 64800,
-    originalPrice: 78000,
-    discountRate: 5,
-  },
-  {
-    id: "11",
-    category: "단품",
-    title: "2026 Hidden Kice 시즌7",
-    price: 40000,
-  },
-  {
-    id: "12",
-    category: "패스",
-    title: "2026 Hidden Kice 시즌7",
-    price: 64800,
-    originalPrice: 78000,
-    discountRate: 5,
-  },
-];
-
 export function ProductGrid() {
+  const { products, isLoading, error } = useProducts();
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<ToolbarCategory>("전체");
 
-  const products = useMemo(() => {
+  const filteredProducts = useMemo(() => {
     const keyword = query.trim().toLowerCase();
 
-    return DUMMY_PRODUCTS.filter((product) => {
+    return products.filter((product) => {
       const matchesCategory = isProductCategory(category)
         ? product.category === category
         : true;
@@ -112,7 +27,7 @@ export function ProductGrid() {
 
       return matchesCategory && matchesQuery;
     });
-  }, [category, query]);
+  }, [category, products, query]);
 
   return (
     <section id="products" className="bg-[#f7f7f7]">
@@ -124,13 +39,21 @@ export function ProductGrid() {
           onCategoryChange={setCategory}
         />
 
-        {products.length === 0 ? (
+        {isLoading ? (
+          <p className="py-20 text-center text-sm text-zinc-500">
+            상품을 불러오는 중...
+          </p>
+        ) : error ? (
+          <p className="py-20 text-center text-sm text-zinc-500">
+            상품을 불러오지 못했습니다.
+          </p>
+        ) : filteredProducts.length === 0 ? (
           <p className="py-20 text-center text-sm text-zinc-500">
             검색 결과가 없습니다.
           </p>
         ) : (
           <div className="mt-8 grid grid-cols-2 gap-8 md:grid-cols-4">
-            {products.map((product) => (
+            {filteredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
           </div>

@@ -1,4 +1,4 @@
-import type { ProductCategory } from "./product-card";
+import type { ProductCategory } from "../types";
 
 const CATEGORIES = ["전체", "패스", "단품"] as const;
 
