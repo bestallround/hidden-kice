@@ -15,37 +15,42 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-10 border-b border-zinc-100 bg-white">
-      <div className="mx-auto grid h-[72px] max-w-[1200px] grid-cols-[1fr_auto_1fr] items-center px-6">
-        <Link href="/store" className="justify-self-start">
-          <img src="/icons/LOGO.svg" alt="HIDDEN KICE" width={143} height={18} />
-        </Link>
+      <div className="mx-auto flex h-[72px] max-w-[1200px] items-center justify-between px-6">
+        <div className="flex min-w-0 items-center gap-[clamp(1.5rem,6vw,100px)]">
+          <Link href="/store" className="shrink-0">
+            <img src="/icons/LOGO.svg" alt="HIDDEN KICE" width={143} height={18} />
+          </Link>
 
-        <nav className="flex items-center gap-9 font-['Pretendard'] text-[18px] leading-[1.6] font-semibold">
-          {NAV_ITEMS.map((item) => {
-            const isActive = item.href !== "#" && pathname.startsWith(item.href);
+          <nav className="flex items-center gap-8 font-['Pretendard'] text-[18px] leading-[1.6] font-semibold">
+            {NAV_ITEMS.map((item) => {
+              const isActive =
+                item.href !== "#" && pathname.startsWith(item.href);
 
-            return (
-              <Link
-                key={item.label}
-                href={item.href}
-                className={isActive ? "text-[#7F77DD]" : "text-[#979CA5]"}
-              >
-                {item.label}
-              </Link>
-            );
-          })}
-        </nav>
+              return (
+                <Link
+                  key={item.label}
+                  href={item.href}
+                  className={isActive ? "text-[#7F77DD]" : "text-[#979CA5]"}
+                >
+                  {item.label}
+                </Link>
+              );
+            })}
+          </nav>
+        </div>
 
-        <div className="flex items-center justify-self-end gap-5">
+        <div className="flex shrink-0 items-center gap-6">
           <button type="button" aria-label="장바구니" className="relative">
             <img src="/icons/shopping-cart.svg" alt="" width={24} height={24} />
-            <span className="absolute -top-1.5 -right-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#5b4dff] px-1 text-[10px] font-semibold text-white">
-              0
+            <span className="absolute -top-1.5 -right-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#7F77DD] px-1 font-['Pretendard'] text-[10px] font-regular text-white">
+              1
             </span>
           </button>
           <button type="button" aria-label="알림" className="relative">
             <img src="/icons/bell.svg" alt="" width={24} height={24} />
-            <span className="absolute -top-0.5 -right-0.5 h-2 w-2 rounded-full bg-[#5b4dff]" />
+            <span className="absolute -top-1.5 -right-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#7F77DD] px-1 font-['Pretendard'] text-[10px] font-regular text-white">
+              1
+            </span>
           </button>
           <button type="button" aria-label="마이페이지">
             <img src="/icons/user.svg" alt="" width={24} height={24} />

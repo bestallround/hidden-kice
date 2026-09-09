@@ -104,9 +104,9 @@ export function HeroBanner() {
           ))}
         </div>
       </div>
-      <p className="pointer-events-none absolute right-6 bottom-4 text-sm text-white/80">
+      <div className="pointer-events-none absolute right-6 bottom-4 flex h-[29px] w-[60px] items-center justify-center rounded-full bg-[#0000004D] px-[10px] py-1 font-['Pretendard'] text-[14px] font-semibold text-white">
         {index + 1}/{BANNERS.length}
-      </p>
+      </div>
     </section>
   );
 }
