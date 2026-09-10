@@ -1,25 +1,29 @@
 "use client";
 
+import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 
 const BANNERS = [
-  { src: "/banners/hero-1.png", alt: "히든카이스 배너 1" },
-  { src: "/banners/hero-2.png", alt: "히든카이스 배너 2" },
-  { src: "/banners/hero-3.png", alt: "히든카이스 배너 3" },
-  { src: "/banners/hero-4.png", alt: "히든카이스 배너 4" },
-  { src: "/banners/hero-5.png", alt: "히든카이스 배너 5" },
+  { src: "/banners/hero-1.png", alt: "히든카이스 배너 1", href: "/series" },
+  { src: "/banners/hero-2.png", alt: "히든카이스 배너 2", href: "/series" },
+  { src: "/banners/hero-3.png", alt: "히든카이스 배너 3", href: "/series" },
+  { src: "/banners/hero-4.png", alt: "히든카이스 배너 4", href: "/series" },
+  { src: "/banners/hero-5.png", alt: "히든카이스 배너 5", href: "/series" },
 ] as const;
 
 const SLIDE_INTERVAL_MS = 3000;
 const DRAG_THRESHOLD_PX = 50;
 
 export function HeroBanner() {
+  const router = useRouter();
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
   const [dragX, setDragX] = useState(0);
   const [isDragging, setIsDragging] = useState(false);
   const startXRef = useRef(0);
   const hoveredRef = useRef(false);
+  const skipClickRef = useRef(false);
 
   useEffect(() => {
     if (paused || isDragging) {
@@ -35,6 +39,7 @@ export function HeroBanner() {
 
   function handlePointerDown(event: React.PointerEvent<HTMLDivElement>) {
     event.currentTarget.setPointerCapture(event.pointerId);
+    skipClickRef.current = false;
     startXRef.current = event.clientX;
     setIsDragging(true);
     setPaused(true);
@@ -55,10 +60,16 @@ export function HeroBanner() {
 
     const delta = event.clientX - startXRef.current;
 
-    if (delta < -DRAG_THRESHOLD_PX) {
-      setIndex((current) => (current + 1) % BANNERS.length);
-    } else if (delta > DRAG_THRESHOLD_PX) {
-      setIndex((current) => (current - 1 + BANNERS.length) % BANNERS.length);
+    if (Math.abs(delta) >= DRAG_THRESHOLD_PX) {
+      skipClickRef.current = true;
+
+      if (delta < 0) {
+        setIndex((current) => (current + 1) % BANNERS.length);
+      } else {
+        setIndex((current) => (current - 1 + BANNERS.length) % BANNERS.length);
+      }
+    } else if (!event.metaKey && !event.ctrlKey && !event.altKey) {
+      router.push(BANNERS[index].href);
     }
 
     setDragX(0);
@@ -94,13 +105,24 @@ export function HeroBanner() {
           }}
         >
           {BANNERS.map((banner) => (
-            <img
+            <Link
               key={banner.src}
-              src={banner.src}
-              alt={banner.alt}
-              draggable={false}
-              className="h-full w-full flex-none object-cover"
-            />
+              href={banner.href}
+              className="h-full w-full flex-none"
+              onClick={(event) => {
+                if (skipClickRef.current) {
+                  event.preventDefault();
+                  skipClickRef.current = false;
+                }
+              }}
+            >
+              <img
+                src={banner.src}
+                alt={banner.alt}
+                draggable={false}
+                className="h-full w-full object-cover"
+              />
+            </Link>
           ))}
         </div>
       </div>
