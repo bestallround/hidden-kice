@@ -2,7 +2,7 @@
 
 히든카이스 스토어 메인 화면을 Next.js로 재현한 면접 과제입니다.
 
-**데모:** [https://hidden-kice.vercel.app](https://hidden-kice.vercel.app)
+**데모:** [https://hidden-kice-nu.vercel.app/store](https://hidden-kice-nu.vercel.app/store)
 
 ## 실행 방법
 
