@@ -32,7 +32,7 @@ export function ProductToolbar({
           value={query}
           onChange={(event) => onQueryChange(event.target.value)}
           placeholder="검색"
-          className="w-full rounded-md border border-[#CED0D4] py-2 pr-8 pl-9 font-['Pretendard'] text-[16px] font-semibold placeholder:text-[#979CA5]"
+          className="w-full rounded-md border border-[#CED0D4] py-2 pr-8 pl-9 font-['Pretendard'] text-[16px] font-semibold placeholder:text-[#979CA5] leading-[1.6]"
         />
         {query ? (
           <button
@@ -46,10 +46,10 @@ export function ProductToolbar({
         ) : null}
       </label>
 
-      <div className="flex items-center gap-3 font-['Pretendard'] text-[16px] font-semibold text-[#979CA5]">
+      <div className="flex items-center gap-3 font-['Pretendard'] text-[16px] font-semibold text-[#979CA5] leading-[1.6]">
         {CATEGORIES.map((item, index) => (
           <span key={item} className="flex items-center gap-3">
-            {index > 0 && <span className="text-[#979CA5]">|</span>}
+            {index > 0 && <span>|</span>}
             <button
               type="button"
               onClick={() => onCategoryChange(item)}

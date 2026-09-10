@@ -42,13 +42,13 @@ export function Header() {
         <div className="flex shrink-0 items-center gap-6">
           <button type="button" aria-label="장바구니" className="relative">
             <img src="/icons/shopping-cart.svg" alt="" width={24} height={24} />
-            <span className="absolute -top-1.5 -right-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#7F77DD] px-1 font-['Pretendard'] text-[10px] font-regular text-white">
+            <span className="absolute -top-1.5 -right-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#7F77DD] px-1 font-['Pretendard'] text-[10px] leading-[1.4] font-regular text-white">
               1
             </span>
           </button>
           <button type="button" aria-label="알림" className="relative">
             <img src="/icons/bell.svg" alt="" width={24} height={24} />
-            <span className="absolute -top-1.5 -right-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#7F77DD] px-1 font-['Pretendard'] text-[10px] font-regular text-white">
+            <span className="absolute -top-1.5 -right-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#7F77DD] px-1 font-['Pretendard'] text-[10px] leading-[1.4] font-regular text-white">
               1
             </span>
           </button>
