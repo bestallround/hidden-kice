@@ -54,8 +54,8 @@ export function Header() {
   }, [menuOpen]);
 
   return (
-    <header>
-      <div className="sticky top-0 z-50 border-b border-zinc-100 bg-white py-2.5">
+    <>
+      <header className="sticky top-0 z-50 border-b border-zinc-100 bg-white py-2.5">
         <div className="mx-auto flex h-14 max-w-[1200px] items-center justify-between px-4 md:h-20 md:px-6">
           <div className="flex min-w-0 items-center gap-3 md:gap-[clamp(1.5rem,6vw,100px)]">
             <button
@@ -126,7 +126,7 @@ export function Header() {
             </button>
           </div>
         </div>
-      </div>
+      </header>
 
       {menuOpen ? (
         <div className="md:hidden">
@@ -158,6 +158,6 @@ export function Header() {
           </div>
         </div>
       ) : null}
-    </header>
+    </>
   );
 }
