@@ -27,13 +27,14 @@ function toProduct(row: ProductRow): Product {
   };
 }
 
+const PRODUCT_COLUMNS =
+  "id, category, title, price, original_price, discount_rate, image_url";
+
 export async function getProducts(): Promise<Product[]> {
   const supabase = getSupabaseClient();
   const { data, error } = await supabase
     .from("products")
-    .select(
-      "id, category, title, price, original_price, discount_rate, image_url",
-    )
+    .select(PRODUCT_COLUMNS)
     .order("title");
 
   if (error) {
@@ -41,4 +42,19 @@ export async function getProducts(): Promise<Product[]> {
   }
 
   return (data ?? []).map(toProduct);
+}
+
+export async function getProduct(id: string): Promise<Product | null> {
+  const supabase = getSupabaseClient();
+  const { data, error } = await supabase
+    .from("products")
+    .select(PRODUCT_COLUMNS)
+    .eq("id", id)
+    .maybeSingle();
+
+  if (error) {
+    throw new Error(error.message);
+  }
+
+  return data ? toProduct(data) : null;
 }
