@@ -5,9 +5,9 @@ import { usePathname } from "next/navigation";
 
 const NAV_ITEMS = [
   { href: "/store", label: "스토어" },
-  { href: "#", label: "AI OMR WORK" },
-  { href: "#", label: "챌린지" },
-  { href: "#", label: "히든카이스 소개" },
+  { href: "/ai-omr-work", label: "AI OMR WORK" },
+  { href: "/challenge", label: "챌린지" },
+  { href: "/about", label: "히든카이스 소개" },
 ] as const;
 
 export function Header() {
@@ -23,8 +23,7 @@ export function Header() {
 
           <nav className="flex items-center gap-8 font-['Pretendard'] text-[18px] leading-[1.6] font-semibold">
             {NAV_ITEMS.map((item) => {
-              const isActive =
-                item.href !== "#" && pathname.startsWith(item.href);
+              const isActive = pathname.startsWith(item.href);
 
               return (
                 <Link
@@ -40,19 +39,19 @@ export function Header() {
         </div>
 
         <div className="flex shrink-0 items-center gap-6">
-          <button type="button" aria-label="장바구니" className="relative">
+          <button type="button" aria-label="장바구니" className="relative cursor-pointer">
             <img src="/icons/shopping-cart.svg" alt="" width={24} height={24} />
             <span className="absolute -top-1.5 -right-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#7F77DD] px-1 font-['Pretendard'] text-[10px] leading-[1.4] font-regular text-white">
               1
             </span>
           </button>
-          <button type="button" aria-label="알림" className="relative">
+          <button type="button" aria-label="알림" className="relative cursor-pointer">
             <img src="/icons/bell.svg" alt="" width={24} height={24} />
             <span className="absolute -top-1.5 -right-2 flex h-4 min-w-4 items-center justify-center rounded-full bg-[#7F77DD] px-1 font-['Pretendard'] text-[10px] leading-[1.4] font-regular text-white">
               1
             </span>
           </button>
-          <button type="button" aria-label="마이페이지">
+          <button type="button" aria-label="마이페이지" className="cursor-pointer">
             <img src="/icons/user.svg" alt="" width={24} height={24} />
           </button>
         </div>
