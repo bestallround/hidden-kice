@@ -10,7 +10,7 @@ export function ProductCard({ product }: { product: Product }) {
 
   return (
     <article>
-      <div className="flex aspect-[4/5] items-center justify-center overflow-hidden border border-dashed border-zinc-300 bg-white text-sm text-zinc-400">
+      <div className="flex aspect-[4/5] items-center justify-center overflow-hidden rounded-md border border-[#E9EAEC] bg-white text-sm text-zinc-400">
         {product.imageUrl ? (
           <img
             src={product.imageUrl}
@@ -21,20 +21,20 @@ export function ProductCard({ product }: { product: Product }) {
           `${product.category} 이미지`
         )}
       </div>
-      <p className="mt-3 text-sm text-zinc-500">{product.category}</p>
-      <h2 className="mt-1 font-semibold">{product.title}</h2>
+      <p className="mt-2 font-['Pretendard'] text-[16px] leading-[1.6] font-semibold text-[#979CA5]">{product.category}</p>
+      <h2 className="font-['Pretendard'] text-[16px] leading-[1.6] font-semibold">{product.title}</h2>
       {hasDiscount ? (
-        <p className="mt-1">
-          <span className="mr-2 text-sm text-zinc-400 line-through">
+        <div className="mt-2 font-['Pretendard']">
+          <p className="text-[14px] font-medium text-[#B2B6BD] line-through">
             {formatPrice(product.originalPrice!)}
-          </span>
-          <span className="mr-2 text-sm text-[#e05a3c]">
-            {product.discountRate}%
-          </span>
-          <span className="font-semibold">{formatPrice(product.price)}</span>
-        </p>
+          </p>
+          <p className="text-[16px] leading-[1.6] font-semibold">
+            <span className="mr-2 text-[#FA622F]">{product.discountRate}%</span>
+            <span>{formatPrice(product.price)}</span>
+          </p>
+        </div>
       ) : (
-        <p className="mt-1 font-semibold">{formatPrice(product.price)}</p>
+        <p className="mt-2 font-['Pretendard'] text-[16px] leading-[1.6] font-semibold">{formatPrice(product.price)}</p>
       )}
     </article>
   );

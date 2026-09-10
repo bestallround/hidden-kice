@@ -30,7 +30,7 @@ export function ProductGrid() {
   }, [category, products, query]);
 
   return (
-    <section id="products" className="bg-[#f7f7f7]">
+    <section id="products">
       <div className="mx-auto max-w-[1200px] px-6 py-12">
         <ProductToolbar
           query={query}
@@ -52,7 +52,7 @@ export function ProductGrid() {
             검색 결과가 없습니다.
           </p>
         ) : (
-          <div className="mt-9 grid grid-cols-2 gap-8 md:grid-cols-4">
+          <div className="mt-9 grid grid-cols-2 gap-12 md:grid-cols-4 md:gap-23">
             {filteredProducts.map((product) => (
               <ProductCard key={product.id} product={product} />
             ))}
