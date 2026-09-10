@@ -15,7 +15,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-10 border-b border-zinc-100 bg-white">
-      <div className="mx-auto flex h-[72px] max-w-[1200px] items-center justify-between px-6">
+      <div className="mx-auto flex h-[100px] max-w-[1200px] items-center justify-between px-6">
         <div className="flex min-w-0 items-center gap-[clamp(1.5rem,6vw,100px)]">
           <Link href="/store" className="shrink-0">
             <img src="/icons/LOGO.svg" alt="HIDDEN KICE" width={143} height={18} />
